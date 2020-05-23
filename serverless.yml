@@ -1,0 +1,40 @@
+service: imageUpload
+
+
+
+custom:
+  bucket: your-s3-bucket-name
+  apigwBinary:
+    types:
+      - 'multipart/form-data'
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: prod
+  region: us-east-2
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:PutObject
+        - s3:PutObjectAcl
+      Resource: 'arn:aws:s3:::${self:custom.bucket}/*'
+
+functions:
+  imageUpload:
+    handler: imageUpload/handler.upload
+    events: 
+      - http: 
+          path: imageUpload
+          method: post
+          cors: true
+    memorySize: 1536MB
+    environment:
+      BUCKET: ${self:custom.bucket}
+
+plugins:
+  - serverless-offline
+  - serverless-apigw-binary
+ 
+  
+ 
