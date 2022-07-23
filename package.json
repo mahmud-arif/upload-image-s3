@@ -2,7 +2,7 @@
   "dependencies": {
     "aws-multipart-parser": "^0.2.1",
     "aws-sdk": "^2.656.0",
-    "file-type": "^14.1.4",
+    "file-type": "^16.5.4",
     "lambda-multipart-parser": "^0.0.2",
     "multiparty": "^4.2.1",
     "parse-multipart": "^1.0.4",
